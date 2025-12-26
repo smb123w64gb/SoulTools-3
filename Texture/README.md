@@ -1,0 +1,2 @@
+#ExtractVTP
+Rips the VTP right out of your VMP, Thankfuly namco has put in the vtp offset and the next segment creditor is right after it. Will make a sister aplication to allow for injection for testing. For larger vtps will need to update the credits and bone names. Thankfuly the bone stuff is the same as 2 so updating offsets there will be a breese.
