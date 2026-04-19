@@ -114,8 +114,13 @@ class MemBuff(object):
         self.space_left = libipc.pine_read(pinIN, offset, c_char(2), False)
         offset += 4
 #Euro SC3 2.0
-'''
 base_offset = 0x4F3898
+
+#Korean
+#base_offset = 0x4F3C58
+
+#JP 1.1
+#base_offset = 0x4F3608
 arrayOfBuff = []
 for x in range(20):
     test = MemBuff(base_offset)
@@ -148,4 +153,4 @@ while(1):
         total += bytes_to_mib(test.space_used)
     print("Total Used space %02.02f Mib" % total)
     time.sleep(1)
-
+'''
