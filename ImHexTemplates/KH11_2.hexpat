@@ -19,6 +19,7 @@ struct KHeader{
     u16 neutralIdx;
     u16 neutralCount;
 };
+u32 attack_count = 0;
 struct smallbit{
 u32 unk0;
 u32 unk1;
@@ -51,7 +52,11 @@ float unknown_multiplier;
 s16 frameCount;
 u16 frameCountUnk;
 u32 cancel_address;
+u8 test @ cancel_address;
 s32 attack_index;
+if(attack_index>0){
+attack_count = attack_count + 1;
+}
 };
 struct vec3short{
 s16 x;
@@ -85,7 +90,7 @@ struct attacks {
 struct KHFile{
 KHeader hdr;
 moves chunks[hdr.numEntries];
-attacks aChunk[hdr.unk4];
+attacks aChunk[attack_count];
 
 };
 
