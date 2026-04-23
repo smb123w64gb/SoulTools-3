@@ -1,0 +1,944 @@
+0,A,Core%i
+2,M,CoreMot%i
+8,C,MitsurugVanillaC%2i
+16,C,MitsurugColorC%2i
+20,C,SeongMinaVanillaC%2i
+28,C,SeongMinaColorC%2i
+32,C,TakiVanillaC%2i
+40,C,TakiColorC%2i
+44,C,MaxiVanillaC%2i
+52,C,MaxiColorC%2i
+56,C,VoldoVanillaC%2i
+64,C,VoldoColorC%2i
+68,C,SophitiaVanillaC%2i
+76,C,SophitiaColorC%2i
+80,C,SiegfriedVanillaC%2i
+88,C,SiegfriedColorC%2i
+92,C,RockVanillaC%2i
+100,C,RockColorC%2i
+104,C,IvyVanillaC%2i
+112,C,IvyColorC%2i
+116,C,KilikVanillaC%2i
+124,C,KilikColorC%2i
+128,C,XianghuaVanillaC%2i
+136,C,XianghuaColorC%2i
+140,C,LizardmanVanillaC%2i
+148,C,LizardmanColorC%2i
+152,C,YoshimitsuVanillaC%2i
+160,C,YoshimitsuColorC%2i
+164,C,NightmareVanillaC%2i
+172,C,NightmareColorC%2i
+176,C,AstarothVanillaC%2i
+184,C,AstarothColorC%2i
+188,C,CervantesVanillaC%2i
+196,C,CervantesColorC%2i
+200,C,RaphaelVanillaC%2i
+208,C,RaphaelColorC%2i
+212,C,TalimVanillaC%2i
+220,C,TalimColorC%2i
+224,C,CassandraVanillaC%2i
+232,C,CassandraColorC%2i
+236,C,YunSeongVanillaC%2i
+244,C,YunSeongColorC%2i
+248,C,LizardMenCVanillaC%2i
+254,C,SetsukaVanillaC%2i
+262,C,SetsukaColorC%2i
+266,C,TiraVanillaC%2i
+274,C,TiraColorC%2i
+278,C,ZasalamelVanillaC%2i
+286,C,ZasalamelColorC%2i
+290,C,OlcadanVanillaC%2i
+298,C,OlcadanColorC%2i
+302,C,AbyssVanillaC%2i
+310,C,AbyssColorC%2i
+314,C,Night_TerroVanillaC%2i
+318,V,MitsurugiS%i
+320,V,SeongMinaS%i
+322,V,TakiS%i
+324,V,MaxiS%i
+326,V,VoldoS%i
+327,V,SophitiaS%i
+329,V,SiegfriedS%i
+331,V,RockS%i
+333,V,IvyS%i
+335,V,KilikS%i
+337,V,XianghuaS%i
+339,V,LizardmanS%i
+340,V,YoshimitsuS%i
+342,V,NightmareS%i
+344,V,AstarothS%i
+346,V,CervantesS%i
+348,V,RaphaelS%i
+350,V,TalimS%i
+352,V,CassandraS%i
+354,V,YunSeongS%i
+356,V,SetsukaS%i
+358,V,TiraS%i
+360,V,ZasalamelS%i
+362,V,OlcadanS%i
+364,V,AbyssS%i
+366,V,Night_TerrorS%i
+368,W,MitsurugiW%2i
+376,W,SeongMina
+384,W,Taki
+392,W,Maxi
+400,W,Voldo
+408,W,Sophitia
+416,W,Siegfried
+424,W,Rock
+432,W,Ivy
+440,W,Kilik
+448,W,Xianghua
+456,W,Lizardman
+464,W,Yoshimitsu
+472,W,NightmareS%i
+480,W,AstarothS%i
+488,W,CervantesS%i
+496,W,RaphaelS%i
+504,W,TalimS%i
+512,W,CassandraS%i
+520,W,YunSeongS%i
+528,W,SetsukaS%i
+536,W,TiraS%i
+544,W,ZasalamelS%i
+552,W,OlcadanS%i
+560,W,AbyssS%i
+568,W,Night_TerrorS%i
+
+File577.pkg Mitsurugi Moveset
+File578.pkg Mitsurugi Exhibition
+File579.pkg Seong Mi-na Moveset
+File580.pkg Seong Mi-na Exhibition
+File581.pkg Taki Moveset
+File582.pkg Taki Exhibition
+File583.pkg Maxi Moveset
+File584.pkg Maxi Exhibition
+File585.pkg Voldo Moveset
+File586.pkg Voldo Exhibition
+File587.pkg Sophitia Moveset
+File588.pkg Sophitia Exhibition
+File589.pkg Siegfried Moveset
+File590.pkg Siegfried Exhibition
+File591.pkg Rock Moveset
+File592.pkg Rock Exhibition
+File593.pkg Ivy Moveset
+File594.pkg Ivy Exhibition
+File595.pkg Kilik Moveset
+File596.pkg Kilik Exhibition
+File597.pkg Xianghua Moveset
+File598.pkg Xianghua Exhibition
+File599.pkg Lizardman Moveset
+File600.pkg Lizardman Exhibition
+File601.pkg Yoshimitsu Moveset
+File602.pkg Yoshimitsu Exhibition
+File603.pkg Nightmare Moveset
+File604.pkg Nightmare Exhibition
+File605.pkg Astaroth Moveset
+File606.pkg Astaroth Exhibition
+File607.pkg Cervantes Moveset
+File608.pkg Cervantes Exhibition
+File609.pkg Raphael Moveset
+File610.pkg Raphael Exhibition
+File611.pkg Talim Moveset
+File612.pkg Talim Exhibition
+File613.pkg Cassandra Moveset
+File614.pkg Cassandra Exhibition
+File615.pkg Yun-seong Moveset
+File616.pkg Yun-seong Exhibition
+File617.pkg Setsuka Moveset
+File618.pkg Setsuka Exhibition
+File619.pkg Tira Moveset
+File620.pkg Tira Exhibition
+File621.pkg Zasalamel Moveset
+File622.pkg Zasalamel Exhibition
+File623.pkg Olcadan Moveset
+File624.pkg Olcadan Exhibition
+File625.pkg Abyss Moveset
+File626.pkg Night Terror Moveset
+File627.pkg Charade
+File628.pkg Charade
+File629.pkg Charade Legs
+File630.pkg Charade Legs
+File631.pkg Charade Eyeball
+File632.pkg Charade Eyeball
+File633.pkg Will o' the wisp (Red)
+File634.pkg Will o' the wisp (Red)
+File635.pkg Will o' the wisp (Green)
+File636.pkg Will o' the wisp (Green)
+File637.pkg Doppelganger
+File638.pkg Doppelganger
+File639.pkg Shadow Master
+File640.pkg Shadow Master
+File641.pkg Amy
+File642.pkg Amy
+File643.pkg Colossus
+File644.pkg Colossus
+File645.pkg SC2 Lizard men (yellow)
+File646.pkg SC2 Lizard men (yellow)
+File647.pkg Zasalamel (Old Man)
+File648.pkg Zasalamel (Old Man)
+-
+-
+-
+-
+-
+-
+File655.pkg Zasalamel (Old Man) Edit
+File656.pkg Zasalamel (Old Man) Edit
+-
+-
+File659.pkg Lizardman (w/ Crown)
+File660.pkg Lizardman (w/ Crown)
+-
+-
+-
+-
+-
+-
+File667.pkg Lizardman Edit (w/ Crown)
+File668.pkg Lizardman Edit (w/ Crown)
+-
+-
+File671.pkg Lizardman (w/ Voldo's Mask)
+-
+File673.pkg Lizardman w/ No Tail
+File674.pkg Lizardman w/ No Tail
+-
+-
+-
+-
+-
+-
+-
+File681.pkg Colorful Lizardman w/ No Tail
+File682.pkg Red/Green Lizardman w/ No Tail
+-
+-
+-
+File685.pkg Low-Poly Knight w/ Lance
+File686.pkg Low-Poly Knight w/ Lance
+File687.pkg Low-Poly Knight w/ Lance
+File688.pkg Low-Poly Knight w/ Lance
+File689.pkg Low-Poly Knight w/ Lance
+File690.pkg Low-Poly Knight w/ Lance
+File691.pkg Low-Poly Soldier
+File692.pkg Low-Poly Soldier
+File693.pkg Low-Poly Soldier
+File694.pkg Low-Poly Soldier
+File695.pkg Low-Poly Soldier
+File696.pkg Low-Poly Soldier
+File697.pkg Low-Poly Soldier
+File698.pkg Low-Poly Soldier
+File699.pkg Low-Poly Soldier
+File700.pkg Low-Poly Soldier
+File701.pkg Low-Poly Soldier
+File702.pkg Low-Poly Soldier
+File703.pkg Low-Poly Soldier
+File704.pkg Mitsurugi
+File705.pkg Miser
+File706.pkg Miser
+-
+-
+File709.pkg Greed
+File710.pkg Greed
+-
+-
+File713.pkg Arthur
+File714.pkg Arthur
+-
+-
+File717.pkg Hwang
+File718.pkg Hwang
+-
+-
+File721.pkg Luna (all modes besides COTS)
+File722.pkg Luna (all modes besides COTS)
+-
+-
+File725.pkg Valeria (all modes besides shop)
+File726.pkg Valeria (all modes besides shop)
+-
+-
+File729.pkg Hualin (all modes besides shop)
+File730.pkg Hualin (all modes besides shop)
+-
+-
+File733.pkg Girardot (all modes besides COTS)
+File734.pkg Girardot (all modes besides COTS)
+-
+-
+File737.pkg Demuth (all modes besides COTS)
+File738.pkg Demuth (all modes besides COTS)
+-
+-
+File741.pkg Aurelia (all modes besides COTS)
+File742.pkg Aurelia (all modes besides COTS)
+-
+-
+File745.pkg Chester (all modes besides COTS)
+File746.pkg Chester (all modes besides COTS)
+-
+-
+File749.pkg Strife (all modes besides COTS)
+File750.pkg Strife (all modes besides COTS)
+-
+-
+File753.pkg Abelia (all modes besides COTS)
+File754.pkg Abelia (all modes besides COTS)
+-
+-
+File757.pkg Lynette (all modes besides shop)
+File758.pkg Lynette (all modes besides shop)
+-
+-
+File761.pkg Li Long
+File762.pkg Li Long
+-
+-
+File765.pkg Revenant
+File766.pkg Revenant
+-
+-
+File769.pkg Lynette (shop)
+-
+File771.pkg Valeria (shop)
+-
+File773.pkg Hualin (shop)
+-
+File775.pkg Berzerker
+-
+File777.pkg Samurai
+File778.pkg Samurai
+File779.pkg Samurai
+File780.pkg Samurai
+File781.pkg Gladiator
+-
+-
+-
+File785.pkg Gladiator
+-
+-
+-
+File789.pkg Unknown Soul
+-
+-
+-
+File793.pkg Unknown Soul
+-
+-
+-
+File797.pkg Unknown Soul
+-
+-
+-
+-
+File801.pkg Fu-ma Ninja
+-
+-
+File805.pkg Fu-ma Ninja
+File806.pkg Fu-ma Ninja
+-
+-
+File809.pkg Fu-ma Ninja
+File810.pkg Fu-ma Ninja
+File811.pkg Fu-ma Ninja
+File812.pkg Fu-ma Ninja
+File813.pkg Bandit
+-
+-
+-
+File817.pkg Bandit
+File818.pkg Bandit
+-
+-
+File821.pkg Thief
+-
+-
+-
+File825.pkg Thief
+-
+-
+-
+File829.pkg Pirate
+File830.pkg Pirate
+File831.pkg Pirate
+-
+File833.pkg Pirate
+File834.pkg Pirate
+File835.pkg Pirate
+File836.pkg Pirate
+File837.pkg Assassin
+-
+-
+-
+File841.pkg Swordsman
+File842.pkg Swordsman
+-
+-
+File845.pkg Footsoldier
+-
+-
+-
+File849.pkg General
+File850.pkg General
+-
+-
+File853.pkg Sentry
+-
+-
+-
+File857.pkg Keres
+-
+-
+-
+File861.pkg Dragon
+-
+-
+-
+File865.pkg Jinkai
+File866.pkg Kagami
+File867.pkg Shiun
+File868.pkg Grandall
+File869.pkg Dalkia
+File870.pkg Brigand
+File871.pkg Maletta
+File872.pkg Rebel
+File873.pkg Shiina
+File874.pkg Chikage
+File875.pkg Konomi
+File876.pkg Grandall
+File877.pkg Dalkia
+File878.pkg Brigand
+File879.pkg Maletta
+File880.pkg Rebel
+File881.pkg Cassius
+File882.pkg Saizou
+File883.pkg Ryouga
+File884.pkg Grandall
+File885.pkg Dalkia
+File886.pkg Brigand
+File887.pkg Maletta
+File888.pkg Rebel
+File889.pkg Kimika
+File890.pkg Syunna
+File891.pkg Tomoe
+File892.pkg Grandall
+File893.pkg Dalkia
+File894.pkg Brigand
+File895.pkg Maletta
+File896.pkg Rebel
+File897.pkg Meiga
+File898.pkg Alastor
+File899.pkg Shizuma
+File900.pkg Grandall
+File901.pkg Dalkia
+File902.pkg Brigand
+File903.pkg Maletta
+File904.pkg Rebel
+File905.pkg Azumi
+File906.pkg Yukina
+File907.pkg Ouka
+File908.pkg Grandall
+File909.pkg Dalkia
+File910.pkg Brigand
+File911.pkg Maletta
+File912.pkg Rebel
+File913.pkg Xiaoxin
+File914.pkg Oruks
+File915.pkg Agareth
+File916.pkg Grandall
+File917.pkg Dalkia
+File918.pkg Brigand
+File919.pkg Maletta
+File920.pkg Rebel
+File921.pkg Jyuri
+File922.pkg Shuyu
+File923.pkg Mingyue
+File924.pkg Grandall
+File925.pkg Dalkia
+File926.pkg Brigand
+File927.pkg Maletta
+File928.pkg Rebel
+File929.pkg Veles
+File930.pkg Aether
+File931.pkg Ixion
+File932.pkg Grandall
+File933.pkg Dalkia
+File934.pkg Brigand
+File935.pkg Maletta
+File936.pkg Rebel
+File937.pkg Siulan
+File938.pkg Fenglin
+File939.pkg Philine
+File940.pkg Grandall
+File941.pkg Dalkia
+File942.pkg Brigand
+File943.pkg Maletta
+File944.pkg Rebel
+File945.pkg Ignis
+File946.pkg Notus
+File947.pkg Azrael
+File948.pkg Grandall
+File949.pkg Dalkia
+File950.pkg Brigand
+File951.pkg Maletta
+File952.pkg Rebel
+File953.pkg Mireille
+File954.pkg Aglaia
+File955.pkg Kanon
+File955.pkg ?
+File957.pkg ?
+File958.pkg ?
+File959.pkg ?
+File960.pkg ?
+File961.pkg Jyurai
+File962.pkg Kureha
+File963.pkg Xunyu
+File964.pkg ?
+File965.pkg ?
+File965.pkg ?
+File966.pkg ?
+File967.pkg ?
+File968.pkg ?
+File969.pkg Fengyu
+File970.pkg Fenglei
+File971.pkg Minlian
+File972.pkg ?
+File973.pkg ?
+File974.pkg ?
+File975.pkg ?
+File976.pkg ?
+File977.pkg Noel
+File978.pkg Rudiger
+File979.pkg Aeneas
+File980.pkg ?
+File981.pkg ?
+File982.pkg ?
+File983.pkg ?
+File984.pkg ?
+File985.pkg Annaretta
+File986.pkg Iris
+File987.pkg Brunhild
+File988.pkg ?
+File989.pkg ?
+File990.pkg ?
+File991.pkg ?
+File992.pkg ?
+File993.pkg Asrafil
+File994.pkg Zifeng
+File995.pkg Aeolos
+File996.pkg ?
+File997.pkg ?
+File998.pkg ?
+File999.pkg ?
+File1000.pkg ?
+File1001.pkg Amrita
+File1002.pkg Azalea
+File1003.pkg Yueliang
+File1004.pkg ?
+File1005.pkg ?
+File1009.pkg Kanade
+File1010.pkg Domenthi
+File1011.pkg Marid
+File1012.pkg ?
+File1013.pkg ?
+File1014.pkg ?
+File1015.pkg ?
+File1016.pkg ?
+File1017.pkg Abrose
+File1018.pkg Ailian
+File1019.pkg Aika
+File1020.pkg ?
+File1021.pkg ?
+File1022.pkg ?
+File1023.pkg ?
+File1024.pkg ?
+File1025.pkg Loki
+File1026.pkg Celestis
+File1027.pkg Beleth
+File1028.pkg ?
+File1029.pkg ?
+File1030.pkg ?
+File1031.pkg ?
+File1032.pkg ?
+File1033.pkg Karen
+File1034.pkg Lilian
+File1035.pkg Abigail
+File1036.pkg ?
+File1037.pkg ?
+File1038.pkg ?
+File1039.pkg ?
+File1040.pkg ?
+File1041.pkg Balduin
+File1042.pkg Aloces
+File1043.pkg Areon
+File1044.pkg ?
+File1045.pkg ?
+File1046.pkg ?
+File1047.pkg ?
+File1048.pkg ?
+File1049.pkg Juno
+File1050.pkg Eurydice
+File1051.pkg Ishtar
+File1052.pkg ?
+File1053.pkg ?
+File1054.pkg ?
+File1055.pkg ?
+File1056.pkg ?
+File1057.pkg Rufus
+File1058.pkg Raguel
+File1059.pkg Feofan
+File1060.pkg ?
+File1061.pkg ?
+File1062.pkg ?
+File1063.pkg ?
+File1064.pkg ?
+File1065.pkg Eunice
+File1066.pkg Acacia
+File1067.pkg Hilda
+File1068.pkg ?
+File1069.pkg ?
+File1070.pkg ?
+File1071.pkg ?
+File1072.pkg ?
+File1073.pkg Iblis
+File1074.pkg Alberic
+File1075.pkg Leshy
+File1076.pkg ?
+File1077.pkg ?
+File1078.pkg ?
+File1079.pkg ?
+File1080.pkg ?
+File1081.pkg Muriel
+File1082.pkg Wenli
+File1083.pkg Irene
+File1084.pkg ?
+File1085.pkg ?
+File1086.pkg ?
+File1087.pkg ?
+File1088.pkg ?
+File1089.pkg Yufeng
+File1090.pkg Yakumo
+File1091.pkg Dufeng
+File1092.pkg ?
+File1093.pkg ?
+File1094.pkg ?
+File1095.pkg ?
+File1096.pkg ?
+File1097.pkg Mayura
+File1098.pkg Meilan
+File1099.pkg Rhea
+File1100.pkg ?
+File1101.pkg ?
+File1102.pkg ?
+File1103.pkg ?
+File1104.pkg ?
+File1105.pkg Halphas
+File1106.pkg Gorus
+File1107.pkg Ilyusha
+File1108.pkg ?
+File1109.pkg ?
+File1110.pkg ?
+File1111.pkg ?
+File1112.pkg ?
+File1113.pkg Edith
+File1114.pkg Riese
+File1115.pkg Agave
+File1116.pkg ?
+File1117.pkg ?
+File1118.pkg ?
+File1119.pkg ?
+File1120.pkg ?
+File1121.pkg Haystir
+File1122.pkg Leraje
+File1123.pkg Ratziel
+File1124.pkg Ratziel
+File1125.pkg Ratziel
+File1126.pkg Ratziel
+-
+-
+File1129.pkg Katina
+File1130.pkg Eris
+File1131.pkg Sizuku
+-
+-
+-
+-
+-
+File1137.pkg Abelia (COTS)
+File1138.pkg Abelia (COTS)
+File1139.pkg Abelia (COTS)
+File1140.pkg Unused Female CaS model
+File1141.pkg Luna (COTS)
+File1142.pkg Luna (COTS)
+File1143.pkg Luna (COTS)
+File1144.pkg Unused Male CaS model (has female voice)
+-
+File1146.pkg Girardot (COTS)
+File1147.pkg Girardot (COTS)
+File1148.pkg Unused female CaS model (has male voice)
+File1149.pkg Strife (COTS)
+File1150.pkg Strife (COTS)
+File1151.pkg Chester (COTS)
+File1152.pkg Chester (COTS)
+File1153.pkg Chester (COTS)
+File1154.pkg Demuth (COTS)
+File1155.pkg Demuth (COTS)
+File1156.pkg Aurelia (COTS)
+File1157.pkg Aurelia (COTS)
+File1158.pkg Aege
+File1159.pkg Aege
+File1160.pkg Aege
+File1161.pkg Heal-Do
+File1162.pkg Heal-Do
+File1163.pkg Heal-Do
+-
+File1165.pkg Elua
+File1166.pkg Elua
+File1167.pkg Elua
+File1168.pkg Lupi
+File1169.pkg Lupi
+File1170.pkg Lupi
+File1171.pkg Roin
+File1172.pkg Roin
+File1173.pkg Kierkess
+File1174.pkg Kierkess
+File1175.pkg Hyle
+File1176.pkg Hyle
+-
+File1178.pkg Mooncalf
+-
+File1180.pkg Ende
+File1181.pkg Scrapped CotS character model
+File1182.pkg ?
+File1183.pkg Will o' the Wisp, Revenant, Charade, Keres
+File1184.pkg Amy Japanese
+File1185.pkg Hwang Japanese
+File1186.pkg Valeria Japanese
+File1187.pkg Hualin Japanese
+File1188.pkg Lynette Japanese
+File1189.pkg Li Long Japanese
+File1190.pkg CaS Young Man 1 Japanese
+File1191.pkg CaS Young Man 1 Japanese
+File1192.pkg CaS Young Man 1 Japanese
+File1193.pkg CaS Young Man 1 Japanese
+File1194.pkg CaS Young Man 2 Japanese
+File1195.pkg CaS Young Man 2 Japanese
+File1196.pkg CaS Young Man 2 Japanese
+File1197.pkg CaS Young Man 2 Japanese
+File1198.pkg CaS Man Japanese
+File1199.pkg CaS Man Japanese
+File1200.pkg CaS Man Japanese
+File1201.pkg CaS Man Japanese
+File1202.pkg CaS Old Man Japanese
+File1203.pkg CaS Old Man Japanese
+File1204.pkg CaS Old Man Japanese
+File1205.pkg CaS Old Man Japanese
+File1206.pkg CaS Girl 1 Japanese
+File1207.pkg CaS Girl 1 Japanese
+File1208.pkg CaS Girl 1 Japanese
+File1209.pkg CaS Girl 1 Japanese
+File1210.pkg CaS Girl 2 Japanese
+File1211.pkg CaS Girl 2 Japanese
+File1212.pkg CaS Girl 2 Japanese
+File1213.pkg CaS Girl 2 Japanese
+File1214.pkg CaS Woman Japanese
+File1215.pkg CaS Woman Japanese
+File1216.pkg CaS Woman Japanese
+File1217.pkg CaS Woman Japanese
+File1218.pkg CaS Old Woman Japanese
+File1219.pkg CaS Old Woman Japanese
+File1220.pkg CaS Old Woman Japanese
+File1221.pkg CaS Old Woman Japanese
+File1222.pkg Amy English
+File1223.pkg Hwang English
+File1224.pkg Valeria English
+File1225.pkg Hualin English
+File1226.pkg Lynette English
+File1227.pkg Li Long English
+File1228.pkg CaS Young Man 1 English
+File1229.pkg CaS Young Man 1 English
+File1230.pkg CaS Young Man 1 English
+File1231.pkg CaS Young Man 1 English
+File1232.pkg CaS Young Man 2 English
+File1233.pkg CaS Young Man 2 English
+File1234.pkg CaS Young Man 2 English
+File1235.pkg CaS Young Man 2 English
+File1236.pkg CaS Man English
+File1237.pkg CaS Man English
+File1238.pkg CaS Man English
+File1239.pkg CaS Man English
+File1240.pkg CaS Old Man English
+File1241.pkg CaS Old Man English
+File1242.pkg CaS Old Man English
+File1243.pkg CaS Old Man English
+File1244.pkg CaS Girl 1 English
+File1245.pkg CaS Girl 1 English
+File1246.pkg CaS Girl 1 English
+File1247.pkg CaS Girl 1 English
+File1248.pkg CaS Girl 2 English
+File1249.pkg CaS Girl 2 English
+File1250.pkg CaS Girl 2 English
+File1251.pkg CaS Girl 2 English
+File1252.pkg CaS Woman English
+File1253.pkg CaS Woman English
+File1254.pkg CaS Woman English
+File1255.pkg CaS Woman English
+File1256.pkg CaS Old Woman English
+File1257.pkg CaS Old Woman English
+File1258.pkg CaS Old Woman English
+File1259.pkg CaS Old Woman English
+File1260.pkg Schweitzer
+File1261.pkg Rapier
+File1262.pkg Fallen Antler
+File1263.pkg Tuck
+File1264.pkg Unicorn
+File1265.pkg Albion
+File1266.pkg Olympus Punisher 1P
+File1267.pkg Olympus Punisher 2P
+File1268.pkg ?
+File1269.pkg ?
+File1270.pkg ?
+File1271.pkg ?
+File1272.pkg ?
+File1273.pkg ?
+File1274.pkg ?
+File1275.pkg ?
+File1276.pkg Glitchy Horse (Brown)
+File1277.pkg Glitchy Horse (Grey)
+File1278.pkg Glitchy Horse (Black)
+File1279.pkg Glitchy Horse (Tan)
+File1280.pkg Low-Poly Lance
+File1281.pkg Low-Poly Sword
+File1282.pkg Low-Poly Halberd
+File1283.pkg Nothing
+File1284.pkg Onimaro & Tobikage
+File1285.pkg Tsubanari & Ryusei
+File1286.pkg Suigetsutou & Ukifune
+File1287.pkg Genma & Kokuken
+File1288.pkg Totsuka & Yatsugashira
+File1289.pkg Red Crow & Rusty Wing
+File1290.pkg Kunai
+File1291.pkg Kaiken
+File1292.pkg Kazekirimaru
+File1293.pkg Nakinue
+File1294.pkg Shutensou
+File1295.pkg Austere & Void
+File1296.pkg Galeforce
+File1297.pkg Zantetsuken
+File1298.pkg Wo Dao
+File1299.pkg Monohoshizao
+File1300.pkg Shiranui
+File1301.pkg Murasame
+File1302.pkg Gassan
+File1303.pkg Kokuenra
+File1304.pkg Quing Long
+File1305.pkg Po Chan
+File1306.pkg Falchion
+File1307.pkg Lei Yan
+File1308.pkg Bonebreaker Sword
+File1309.pkg Blue Thunder
+File1310.pkg Dragon Sword
+File1311.pkg Heisheng Jian
+File1312.pkg Huan Luo
+File1313.pkg Jiaotu Jian
+File1314.pkg Rune Blade
+File1315.pkg Duijiao Gui
+File1316.pkg Dystopia
+File1317.pkg Soul Calibur
+File1318.pkg Midnight
+File1319.pkg Kick Edge
+File1320.pkg Grieve Edge
+File1321.pkg Senjinsoku
+File1322.pkg Cailleach Bheur
+File1323.pkg Svaldifari
+File1324.pkg Cepheus Seal
+File1325.pkg Hell's Design
+File1326.pkg Mushakuboh
+File1327.pkg Quarterstaff
+File1328.pkg Iron Staff
+File1329.pkg Duel Rod
+File1330.pkg Kunlun Bamboo
+File1331.pkg Cepheus Seal
+File1332.pkg Heavy Lance
+File1333.pkg Pilum Muralis
+File1334.pkg Bourdonasse
+File1335.pkg Ahlspiess
+File1336.pkg Dreadnought
+File1337.pkg Absolution
+File1338.pkg Blazecleaver
+File1339.pkg Sacrifice
+File1340.pkg Steel Fan
+File1341.pkg Kamaitachi
+File1342.pkg Fujin Fan
+File1343.pkg Zephyrus
+File1344.pkg Basho Fan
+File1345.pkg Baindigart
+File1346.pkg Sickle
+File1347.pkg Kogarashi
+File1348.pkg Mizuchi
+File1349.pkg Yaesumuji
+File1350.pkg Chains of Hades
+File1351.pkg Black Widow
+File1352.pkg Jambiya
+File1353.pkg Assassin Dagger
+File1354.pkg Kris
+File1355.pkg Misericorde
+File1356.pkg Tongue of Tonatiuh
+File1357.pkg Kingslayer
+File1358.pkg Great Sword
+File1359.pkg Claymore
+File1360.pkg Demon Knife
+File1361.pkg Hercules Sword
+File1362.pkg Alondite
+File1363.pkg Ambition
+File1364.pkg Soul Edge
+File1365.pkg Brutal Terra
+File1366.pkg Gladius
+File1367.pkg Ice Blade
+File1368.pkg Katzbalger
+File1369.pkg Excalibur
+File1370.pkg Valkyrie
+File1371.pkg Eternal Rest
+File1372.pkg Lilia
+File1373.pkg Melody Ring
+File1374.pkg Mazurka
+File1375.pkg Tarantella
+File1376.pkg Menard
+File1377.pkg Terpsichore
+File1378.pkg Cepheus Seal
+File1379.pkg Nunchaku
+File1380.pkg Gemini Rod
+File1381.pkg Zhongkui
+File1382.pkg Huoshen
+File1383.pkg Shuang Lei
+File1384.pkg Falcon
+File1385.pkg Wave Sword
+File1386.pkg Mantis Blade
+File1387.pkg Double Fang
+File1388.pkg Aya & Hongya
+File1389.pkg Atropos
+File1390.pkg Gatekeeper
+File1391.pkg Leviathan
+File1392.pkg Amy Moveset
+File1393.pkg Colossus Moveset
+File1394.pkg Lizardman Prototype Moveset
+File1395.pkg Hovering in the Air (unplayable)
+File1396.pkg Revenant Prototype (unplayable)
+File1397.pkg Miser Moveset
+File1398.pkg Greed Moveset
+File1399.pkg Arthur Moveset
+File1400.pkg Hwang Moveset
+File1401.pkg Luna Moveset
+File1402.pkg Valeria Moveset
+File1403.pkg Hualin Moveset
+File1404.pkg Girardot Moveset
+File1405.pkg Demuth Moveset
+File1406.pkg Aurelia Moveset
+File1407.pkg Chester Moveset
+File1408.pkg Stife Moveset
+File1409.pkg Abelia Moveset
+File1410.pkg Lynette Moveset
+File1411.pkg Li Long Moveset
+File1412.pkg Revenant Moveset
+File1413.pkg Standing Stance (unplayable)
