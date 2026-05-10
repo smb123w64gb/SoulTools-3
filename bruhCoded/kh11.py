@@ -1,4 +1,4 @@
-import struct
+import struct,os
 
 def u8(file):
     return struct.unpack("B", file.read(1))[0]
@@ -104,24 +104,31 @@ class KHeader:
         return f"KHeader(magic={self.magic}, numEntries={self.numEntries})"
 
 
-def parse_kh_file(file_path):
-    with open(file_path, "rb") as f:
-        hdr = KHeader(f)
-        
-        chunks = []
-        for _ in range(hdr.numEntries):
-            chunks.append(Moves(f))
-        return {
-            "header": hdr,
-            "moves": chunks,
-        }
+def parse_kh_file(f):
+    hdr = KHeader(f)
     
+    chunks = []
+    for _ in range(hdr.numEntries):
+        chunks.append(Moves(f))
+    return {
+        "header": hdr,
+        "moves": chunks,
+    }
+
 import sys
 
 #note to self, just pass the open file so i can grab the cmd blocks.
-
-data = parse_kh_file(sys.argv[1])
-print(data["header"])
-lenz = []
+file = open(sys.argv[1],'rb')
+data = parse_kh_file(file)
+bases = []
 for move in data["moves"]:
-    print(hex(move.cancel_address))
+    bases.append(move.cancel_address)
+file.seek(0,2)
+bases.append(file.tell())
+outDir = str(sys.argv[1]+"_Extract/")
+os.makedirs(outDir, exist_ok=True)
+for x in range(len(bases)-1):
+    file.seek(bases[x])
+    fil = open(outDir + str("%04i" % x) + ".bin",'wb')
+    fil.write(file.read((bases[x+1]-bases[x])))
+    fil.close()

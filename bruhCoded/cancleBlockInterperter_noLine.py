@@ -17,7 +17,7 @@ class StateMech(object):
     def __init__(self):
         self.BEValue = 0
         self.SpecalReturn = 0
-        self.resultBuffer = 0
+        self.resultBuffer = []
         self.curOff = 0
     def readState(self,f):
         state = u8(f)
@@ -27,44 +27,50 @@ class StateMech(object):
             print("endOfcmd")
             return 0
         elif(state == 8):
-            print("%04i END" %(self.curOff))
+            print("END" )
             self.curOff+=1
         elif(state == 0x14):
-            print("%04i AND" %(self.curOff))
+            print("AND" )
             self.curOff+=1
         elif(state == 0x15):
-            print("%04i OR" %(self.curOff))
+            print("OR" )
             self.curOff+=1
         elif(state == 0x16):
-            print("%04i NotZero" %(self.curOff))
+            print("NotZero" )
             self.curOff+=1
         elif(state == 0x17):
-            print("%04i LeftShift" %(self.curOff))
+            print("LeftShift" )
             self.curOff+=1
         elif(state == 0x18):
-            print("%04i RightShift" %(self.curOff))
+            print("RightShift" )
             self.curOff+=1
         elif(state == 3 or state == 4 or state == 0x2a):
             arg1 = b16(f)
-            print("%04i JMP: %04i" %(self.curOff,arg1))
+            print("JMP: %04i" %(arg1))
             self.curOff+=3
         elif(state == 0x25):
             indexFunc = u8(f)
             arg1 = u8(f)
-            print("%04i FUN_%s(Current_Player,%s,0x4f6bd0)" %(self.curOff,funcAdr[indexFunc],hex(arg1)))
+            curStr = str("FUN_%s(" % funcAdr[indexFunc])
+            for x in range(arg1):
+                if(x>0):
+                    curStr += ","
+                curStr += str("%s"%hex(self.resultBuffer.pop()))
+            curStr += ")"
+            print(curStr)
             self.curOff+=3
         elif(state == 0x28):
             arg1 = b16(f)
-            print("%04i JMPIF:%04i" %(self.curOff,arg1))
+            print("JMPIF:%04i" %(arg1))
             self.curOff+=3
         elif(state == 0xB or state == 9):
             arg1 = b16(f)
-            self.resultBuffer = arg1
-            print("%04i Store: %s" %(self.curOff,hex(arg1)))
+            self.resultBuffer.append(arg1)
+            #print("Store: %s" %(hex(arg1)))
             self.curOff+=3
         elif(state == 1):
             arg1 = b16(f)
-            print("%04i Intro:%s : %s" %(self.curOff,hex(state),arg1))
+            print("Intro:%s : %s" %(hex(state),arg1))
             self.curOff+=3
         return 1
 test = StateMech()

@@ -51,15 +51,15 @@ enum DmaTagType : u64
     P2_DMA_TAG_END = 7
 };
 enum psm_types : u32{
-GS_TEX_32 =          0,
-GS_TEX_24 =          1,
-GS_TEX_16 =          2,
-GS_TEX_16S =        10,
-GS_TEX_8 =         19,
-GS_TEX_4 =         20,
-GS_TEX_8H =         27,
-GS_TEX_4HL =        36,
-GS_TEX_4HH =        44
+    GS_TEX_32 =          0,
+    GS_TEX_24 =          1,
+    GS_TEX_16 =          2,
+    GS_TEX_16S =        10,
+    GS_TEX_8 =         19,
+    GS_TEX_4 =         20,
+    GS_TEX_8H =         27,
+    GS_TEX_4HL =        36,
+    GS_TEX_4HH =        44
 };
 enum GsTexFunctions : u32{
     GS_TEX_MODULATE     =0,    /** brighten texture based on Pixel's Alpha */
