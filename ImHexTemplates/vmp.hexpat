@@ -212,28 +212,7 @@ struct tVector3f{
     float Z;
 }[[static,name(std::format("{},{},{}", X, Y,Z))]];
 
-struct Header{
-    u32 Type;
-    u8 Unk04;
-    u8 Unk05;
-    u8 Unk06;
-    u8 Unk07;
-    u16 Object1Count;
-    u16 BoneCount;
-    u32 VertCount;
-    padding[16]; //SC3 Specal
-    u32 BoneOffset;
-    u32 tex_file_addr;
-    u32 Object1Offset;
-    u32 table5_addr;
-    u32 table4_addr;
-    u32 BoneHeaderOffset;
-    u32 unk016;
-    u32 table1_addr;
-    u32 table2_addr;
-    u32 table3_addr;
-    u32 table6_addr;
-};
+
 struct boneInfo { // bone positions relative to its parent
     tVector4f EndPositionXYZScale;
     tVector4f StartPositionXYZScale;
@@ -317,9 +296,71 @@ struct objectPoint{
 u32 offset;
 objectLayer Layer @ offset;
 };
+
+struct table2{
+u32 unk0;
+u32 unk1;
+u32 unk2;
+};
+
+struct Header{
+    u32 Type;
+    u8 Unk04;
+    u8 Unk05;
+    u8 Unk06;
+    u8 Unk07;
+    u16 Object1Count;
+    u16 BoneCount;
+    u32 VertCount;
+    padding[16]; //SC3 Specal
+    u32 BoneOffset;
+    u32 tex_file_addr;
+    u32 Object1Offset;
+    u32 table5_addr;
+    u32 table4_addr;
+    u32 BoneHeaderOffset;
+    u32 unk016;
+    u32 table1_addr;
+    u32 table2_addr;
+    u32 table3_addr;
+    u32 table6_addr;
+};
+struct table4{
+    u8 type;
+    u8 count;
+    u8 unk0;
+    u8 unk1;
+    match(type){
+        (1):u32 val;
+        (2):u32 val[2];
+        (3):u32 val;
+        (4):u32 val;
+        (6):u32 val;
+        (7):{
+            u8 indexes[count];
+            padding[0x20-count];
+        }
+        (8):u32 val;
+        (9):u32 val;
+        (10):u32 val;
+        (11):u32 val;
+        (16):{
+            u8 indexes[count];
+            padding[0x20-count];
+        }
+    }
+};
+struct table4Entrys{
+table4 Entry[while(std::mem::read_unsigned($, 1) != 0)];
+padding[4];
+};
+
 struct VMP{
 Header HDR;
 objectPoint Objects[HDR.Object1Count] @ HDR.table1_addr;
+table2 tbl2 @ HDR.table2_addr;
+u32 tbl3 @ HDR.table3_addr;
+table4Entrys tbl4 @  HDR.table4_addr;
 boneInfo Bones[HDR.BoneCount] @ HDR.BoneOffset;
 VPT tex @ offsetto;
 //u8 texture[HDR.BoneHeaderOffset - HDR.tex_file_addr] @ HDR.tex_file_addr;
