@@ -1,8 +1,48 @@
 import sys
 import struct
 
-funcAdr = ["00189c20","00189c20","00173470","00173470","001b2020","001b18e8","001b1908","001b1928","001b1948","001b23f0","001b2420","001b5660","001b26e0","001b1968","001b1dd8","001b1e00","001b1e28","001b1e50","001b5660","001b5660","001b2620","001b19c0","001b1aa8","001b1c40","001b1c80","001b2020","001b1a88","001b1e98","001b1ec0","001b1ee8","001b1f10","001b1e98","001b1ec0","001b1ee8","001b1f10","001b56d0","001b5660","001b56b8"]
-
+funcAdr = [
+    "FUN_0000",
+    "CheckVal",
+"FUN_0002",
+"FUN_0003",
+"FUN_0004",
+"FUN_0005",
+"ReturnBlk",
+"FUN_0007",
+"FUN_0008",
+"FUN_0009",
+"FUN_0010",
+"FUN_0011",
+"FUN_0012",
+"FUN_0013",
+"FUN_0014",
+"FUN_0015",
+"FUN_0016",
+"FUN_0017",
+"FUN_0018",
+"FUN_0019",
+"FUN_0020",
+"FUN_0021",
+"FUN_0022",
+"FUN_0023",
+"FUN_0024",
+"FUN_0025",
+"FUN_0026",
+"FUN_0027",
+"FUN_0028",
+"FUN_0029",
+"FUN_0030",
+"FUN_0031",
+"FUN_0032",
+"FUN_0033",
+"FUN_0034",
+"FUN_0035",
+"FUN_0036",
+"FUN_0037",
+"FUN_0038",
+"FUN_0039"
+]
 def u8(file):
     return struct.unpack("B", file.read(1))[0]
 
@@ -19,6 +59,7 @@ class StateMech(object):
         self.SpecalReturn = 0
         self.resultBuffer = []
         self.curOff = 0
+        self.curVar = 0
     def readState(self,f):
         state = u8(f)
         leadbit = state & 0x80
@@ -27,7 +68,9 @@ class StateMech(object):
             print("endOfcmd")
             return 0
         elif(state == 8):
-            print("END" )
+            
+            print("return Val%02i" % (self.curVar-1))
+            self.curVar -= 1
             self.curOff+=1
         elif(state == 0x14):
             print("AND" )
@@ -51,7 +94,8 @@ class StateMech(object):
         elif(state == 0x25):
             indexFunc = u8(f)
             arg1 = u8(f)
-            curStr = str("FUN_%s(" % funcAdr[indexFunc])
+            curStr = str("\tVal%02i = %s(" % (self.curVar,funcAdr[indexFunc]))
+            self.curVar+=1
             for x in range(arg1):
                 if(x>0):
                     curStr += ","
@@ -61,7 +105,9 @@ class StateMech(object):
             self.curOff+=3
         elif(state == 0x28):
             arg1 = b16(f)
-            print("JMPIF:%04i" %(arg1))
+            
+            print("if(Val%02i):goto %04i" %(self.curVar-1,arg1))
+            self.curVar-=1
             self.curOff+=3
         elif(state == 0xB or state == 9):
             arg1 = b16(f)
