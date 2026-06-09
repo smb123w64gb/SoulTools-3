@@ -113,47 +113,22 @@ class MemBuff(object):
         offset += 4
         self.space_left = libipc.pine_read(pinIN, offset, c_char(2), False)
         offset += 4
-#Euro SC3 2.0
-base_offset = 0x4F3898
 
-#Arcade
-#base_offset = 0x41AD98 
 
-#Korean
-#base_offset = 0x4F3C58
-
-#JP 1.1
-#base_offset = 0x4F3608
-arrayOfBuff = []
-for x in range(20):#20 console 25 arcade
-    test = MemBuff(base_offset)
-    arrayOfBuff.append(test)
-    base_offset += 0x38
+base_offset_motion = 0x4B86C2
+base_kh_index = 0x4B8252
+cur = 0xFFFF
+cur_khaddr = 0
+kh_addr = 0x4BBF74
 while(1):
-    total = 0.0
-    os.system('cls')
-    for test in arrayOfBuff:
-        test.read(ipc)
-        print(test.__str__(True))
-        total += bytes_to_mib(test.space_used)
-    print("Total Used space %02.02f Mib" % total)
-    time.sleep(5)
+    curkh = libipc.pine_read(ipc, kh_addr, c_char(2), False)
+    new = libipc.pine_read(ipc, base_kh_index, c_char(1), False)
+    if(new != cur and new != 0xFFFF):
+        BlockOffset = (curkh+0x28+(new*64))
+        animID = libipc.pine_read(ipc, BlockOffset, c_char(1), False)
+        print("Action %s : Animation:%s @ %s"%(hex(new),hex(animID),hex(BlockOffset)))
+    if(curkh != cur_khaddr):print("Current KH11 @%s"%hex(curkh))
+    cur = new
+    cur_khaddr = curkh
 
-#NTSC SC2
-'''
-base_offset = 0x3F55B0
-arrayOfBuff = []
-for x in range(18):
-    test = MemBuff(base_offset)
-    arrayOfBuff.append(test)
-    base_offset += 0x38
-while(1):
-    total = 0.0
-    os.system('cls')
-    for test in arrayOfBuff:
-        test.read(ipc)
-        print(test.__str__(True))
-        total += bytes_to_mib(test.space_used)
-    print("Total Used space %02.02f Mib" % total)
-    time.sleep(1)
-'''
+
