@@ -122,12 +122,20 @@ cur_khaddr = 0
 kh_addr = 0x4BBF74
 while(1):
     curkh = libipc.pine_read(ipc, kh_addr, c_char(2), False)
+    cur_attack_offset = curkh + libipc.pine_read(ipc, (curkh + 0x10), c_char(2), False)
     new = libipc.pine_read(ipc, base_kh_index, c_char(1), False)
     if(new != cur and new != 0xFFFF):
+        
         BlockOffset = (curkh+0x28+(new*64))
+
         animID = libipc.pine_read(ipc, BlockOffset, c_char(1), False)
+        AttackIndex = libipc.pine_read(ipc, (BlockOffset + 60), c_char(2), False)
         print("Action %s : Animation:%s @ %s"%(hex(new),hex(animID),hex(BlockOffset)))
-    if(curkh != cur_khaddr):print("Current KH11 @%s"%hex(curkh))
+        if(AttackIndex != 0xFFFFFFFF):
+            print("HurtBox @ %s"%hex(cur_attack_offset+(0x58*AttackIndex)))
+    if(curkh != cur_khaddr):
+        print("Current KH11 @%s"%hex(curkh))
+        print("Current AttackList @%s"%hex(cur_attack_offset))
     cur = new
     cur_khaddr = curkh
 
