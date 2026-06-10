@@ -76,9 +76,8 @@ struct attacks {
     vec3short block_vec;
     vec3short grounded_vec;
     
-    //vec3short unk;
-    padding[4];
-    
+    u16 type;
+    u16 notsure;
     u16 start;
     u16 active;
     s16 damage;
@@ -88,7 +87,10 @@ struct attacks {
     u16 block_stun;
     u16 hit_stun;
     u16 counter_stun;
-    padding[18];
+    u16 unsure2;
+    u16 dmg_type;
+    u16 counter_type;
+    padding[12];
 };
 struct KHFile{
 KHeader hdr;
