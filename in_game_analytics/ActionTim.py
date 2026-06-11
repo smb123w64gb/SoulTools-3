@@ -132,7 +132,7 @@ while(1):
         AttackIndex = libipc.pine_read(ipc, (BlockOffset + 60), c_char(2), False)
         print("Action %s : Animation:%s @ %s"%(hex(new),hex(animID),hex(BlockOffset)))
         if(AttackIndex != 0xFFFFFFFF):
-            print("HurtBox @ %s"%hex(cur_attack_offset+(0x58*AttackIndex)))
+            print("HurtBox #%03i @ %s"%(AttackIndex,hex(cur_attack_offset+(0x58*AttackIndex))))
     if(curkh != cur_khaddr):
         print("Current KH11 @%s"%hex(curkh))
         print("Current AttackList @%s"%hex(cur_attack_offset))
