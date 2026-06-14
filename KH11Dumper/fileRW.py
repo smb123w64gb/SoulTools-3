@@ -36,6 +36,9 @@ class FRead(object): #Generic file reader
     def g16_3(self):
         val = [self.g16(),self.g16(),self.g16()]
         return val
+    def u16_3(self):
+        val = [self.u16(),self.u16(),self.u16()]
+        return val
     def f32(self):
         return struct.unpack(self.endian+'f', self.file.read(4))[0]
     def f32_4(self):
@@ -89,6 +92,8 @@ class FWrite(object): #Generic file writer
         self.file.write(struct.pack(self.endian+'I', val))
     def u16(self,val):
         self.file.write(struct.pack(self.endian+'H', val))
+    def u16_3(self,val):
+        self.file.write(struct.pack(self.endian+'HHH', val[0],val[1],val[2]))
     def u8(self,val):
         self.file.write(struct.pack(self.endian+'B', val))
     def u8_4(self,val):

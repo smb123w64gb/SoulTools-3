@@ -1,6 +1,52 @@
 from fileRW import *
 
+def readcmd(f:FRead):
+    values = []
+    while(1):
+        state = f.u8()
+        
+        values.append(state)
+        state = state & 0x7f
+        match state:
+            case 1 | 3 | 4 | 9 | 0xa | 0x25 | 0x28 | 0x2a:
+                values.append(f.u8())
+                values.append(f.u8())
+            case 2 | 6:
+                    return values
+            case _:
+                pass
+def cmdLnFind(action,f:FRead):
+        ret = f.tell()
+        f.seek(action.cmd_address)
+        data = readcmd(f)
+        f.seek(ret)
+        return data
+
 class KH11(object):
+    def __init__(self):
+        self.header = self.Header()
+        self.Normal = []
+        self.Movement = []
+        self.Hurt = []
+        self.Subroutine = []
+    def read(self,f:FRead):
+        self.header.read(f)
+        for x in range(self.header.moveGrpCount1):
+            act = self.ActionInfo()
+            act.read(f)
+            self.Normal.append(act)
+        for x in range(self.header.moveGrpCount2):
+            act = self.ActionInfo()
+            act.read(f)
+            self.Movement.append(act)
+        for x in range(self.header.hurtCount):
+            act = self.ActionInfo()
+            act.read(f)
+            self.Hurt.append(act)
+        for x in range(self.header.neutralCount):
+            act = self.ActionInfo()
+            act.read(f)
+            self.Subroutine.append(act)
     class Header(object):
         def __init__(self):
             self.MAGIC = b'KH11'
@@ -90,8 +136,9 @@ class KH11(object):
             self.unknown_multiplier = 0.0
             self.frameCount = 0
             self.frameCountUnk = 0
-            self.cancel_address = 0
+            self.cmd_address = 0
             self.attack_index = -1
+            self.cmd_data = []
         def read(self,f:FRead):
             self.motionIdx = f.s16()
             self.unkMotion = f.u16()
@@ -109,8 +156,18 @@ class KH11(object):
             self.unknown_multiplier = f.f32()
             self.frameCount = f.s16()
             self.frameCountUnk = f.u16()
-            self.cancel_address = f.u32()
+            self.cmd_address = f.u32()
             self.attack_index = f.s32()
+            self.cmd_data = cmdLnFind(self,f)
+        def __str__(self):
+            strOut = ''
+            if(not 0x1000 & self.attack_index):
+                strOut += 'Hurtbox:' + hex(self.attack_index)
+            elif(self.attack_index > 0):
+                strOut += 'GrabIndex:' + hex(self.attack_index&0xFFF)
+            #strOut += str('Mot0: %04i | Mot1: %04i'%(self.motionIdx,self.unkMotion))
+
+            return strOut
         def write(self,f:FWrite):
             f.s16(self.motionIdx)
             f.u16(self.unkMotion)
@@ -128,8 +185,90 @@ class KH11(object):
             f.f32(self.unknown_multiplier)
             f.s16(self.frameCount)
             f.u16(self.frameCountUnk)
-            f.u32(self.cancel_address)
+            f.u32(self.cmd_address)
             f.s32(self.attack_index)
     class AttackInfo(object):
         def __init__(self):
-            pass
+            self.hitbox = 0
+            self.unk1 = 0
+            self.unk2 = 0
+            self.normal_vec = 0
+            self.normal_launch_vec = 0
+            self.counter_vec = 0
+            self.counter_launch_vec = 0
+            self.airborne_vec = 0
+            self.block_vec = 0
+            self.grounded_vec = 0
+            self.type = 0
+            self.notsure = 0
+            self.start = 0
+            self.active = 0
+            self.damage = 0
+            self.activeNOT = 0
+            self.not_dmg = 0
+            self.block_stun = 0
+            self.hit_stun = 0
+            self.counter_stun = 0
+            self.unsure2 = 0
+            self.dmg_type = 0
+            self.counter_type = 0
+            self.unk3 = 0
+            self.unk4 = 0
+            self.unk5 = 0
+            self.unk6 = 0
+        def read(self,f:FRead):
+            self.hitbox = f.u32()
+            self.unk1 = f.u16()
+            self.unk2 = f.u16()
+            self.normal_vec = f.u16_3()
+            self.normal_launch_vec = f.u16_3()
+            self.counter_vec = f.u16_3()
+            self.counter_launch_vec = f.u16_3()
+            self.airborne_vec = f.u16_3()
+            self.block_vec = f.u16_3()
+            self.grounded_vec = f.u16_3()
+            self.type = f.u16()
+            self.notsure = f.u16()
+            self.start = f.u16()
+            self.active = f.u16()
+            self.damage = f.s16()
+            self.activeNOT = f.u16()
+            self.not_dmg = f.u16()
+            self.block_stun = f.u16()
+            self.hit_stun = f.u16()
+            self.counter_stun = f.u16()
+            self.unsure2 = f.u16()
+            self.dmg_type = f.u16()
+            self.counter_type = f.u16()
+            self.unk3 = f.u16()
+            self.unk4 = f.u16()
+            self.unk5 = f.u32()
+            self.unk6 = f.u32()
+        def write(self,f:FWrite):
+            f.u32(self.hitbox)
+            f.u16(self.unk1)
+            f.u16(self.unk2)
+            f.u16_3(self.normal_vec)
+            f.u16_3(self.normal_launch_vec)
+            f.u16_3(self.counter_vec)
+            f.u16_3(self.counter_launch_vec)
+            f.u16_3(self.airborne_vec)
+            f.u16_3(self.block_vec)
+            f.u16_3(self.grounded_vec)
+            f.u16(self.type)
+            f.u16(self.notsure)
+            f.u16(self.start)
+            f.u16(self.active)
+            f.s16(self.damage)
+            f.u16(self.activeNOT)
+            f.u16(self.not_dmg)
+            f.u16(self.block_stun)
+            f.u16(self.hit_stun)
+            f.u16(self.counter_stun)
+            f.u16(self.unsure2)
+            f.u16(self.dmg_type)
+            f.u16(self.counter_type)
+            f.u16(self.unk3)
+            f.u16(self.unk4)
+            f.u32(self.unk5)
+            f.u32(self.unk6)

@@ -64,9 +64,9 @@ s16 y;
 s16 z;
 };
 struct attacks {
-    u16 hitbox;
+    u32 hitbox;
     u16 unk1;
-    u32 unk2;
+    u16 unk2;
     
     vec3short normal_vec;
     vec3short normal_launch_vec;
@@ -90,7 +90,10 @@ struct attacks {
     u16 unsure2;
     u16 dmg_type;
     u16 counter_type;
-    padding[12];
+    u16 unk3;
+    u16 unk4;
+    u32 unk5;
+    u32 unk6;
 };
 struct KHFile{
 KHeader hdr;
