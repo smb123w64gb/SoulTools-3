@@ -8,11 +8,11 @@ def readcmd(f:FRead):
         values.append(state)
         state = state & 0x7f
         match state:
-            case 1 | 3 | 4 | 9 | 0xa | 0x25 | 0x28 | 0x2a:
+            case 1 | 3 | 4 | 9 | 0xB | 0x25 | 0x28 | 0x2a:
                 values.append(f.u8())
                 values.append(f.u8())
             case 2 | 6:
-                    return values
+                return values
             case _:
                 pass
 def cmdLnFind(action,f:FRead):
@@ -31,22 +31,31 @@ class KH11(object):
         self.Subroutine = []
     def read(self,f:FRead):
         self.header.read(f)
-        for x in range(self.header.moveGrpCount1):
-            act = self.ActionInfo()
-            act.read(f)
-            self.Normal.append(act)
-        for x in range(self.header.moveGrpCount2):
-            act = self.ActionInfo()
-            act.read(f)
-            self.Movement.append(act)
-        for x in range(self.header.hurtCount):
-            act = self.ActionInfo()
-            act.read(f)
-            self.Hurt.append(act)
-        for x in range(self.header.neutralCount):
-            act = self.ActionInfo()
-            act.read(f)
-            self.Subroutine.append(act)
+        remainder = self.header.numEntries
+        if(self.header.moveGrpCount1 != 0xFFFF):
+            for x in range(self.header.moveGrpCount1):
+                act = self.ActionInfo()
+                act.read(f)
+                self.Normal.append(act)
+                remainder -= 1
+        if(self.header.moveGrpCount2 != 0xFFFF and remainder>0):
+            for x in range(self.header.moveGrpCount2):
+                act = self.ActionInfo()
+                act.read(f)
+                self.Movement.append(act)
+                remainder-=1
+        if(self.header.hurtCount != 0xFFFF and remainder>0):
+            for x in range(self.header.hurtCount):
+                act = self.ActionInfo()
+                act.read(f)
+                self.Hurt.append(act)
+                remainder-=1
+        if(self.header.neutralCount != 0xFFFF and remainder>0):
+            for x in range(self.header.neutralCount):
+                act = self.ActionInfo()
+                act.read(f)
+                self.Subroutine.append(act)
+                remainder-=1
     class Header(object):
         def __init__(self):
             self.MAGIC = b'KH11'
@@ -158,6 +167,7 @@ class KH11(object):
             self.frameCountUnk = f.u16()
             self.cmd_address = f.u32()
             self.attack_index = f.s32()
+            print(hex(f.tell()))
             self.cmd_data = cmdLnFind(self,f)
         def __str__(self):
             strOut = ''

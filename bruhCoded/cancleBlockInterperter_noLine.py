@@ -58,38 +58,42 @@ class StateMech(object):
         self.BEValue = 0
         self.SpecalReturn = 0
         self.resultBuffer = []
+        self.jumpPoint = []
         self.curOff = 0
         self.curVar = 0
     def readState(self,f):
+        if self.curOff in self.jumpPoint:
+            print("Addr_%04i:" %(self.curOff))
         state = u8(f)
         leadbit = state & 0x80
         state = state & 0x7f
         if(state == 2 or state == 6):
-            print("endOfcmd")
+            print("\tendOfcmd")
             return 0
         elif(state == 8):
             
-            print("return Val%02i" % (self.curVar-1))
+            print("\treturn Val%02i" % (self.curVar-1))
             self.curVar -= 1
             self.curOff+=1
         elif(state == 0x14):
-            print("AND" )
+            print("\tAND" )
             self.curOff+=1
         elif(state == 0x15):
-            print("OR" )
+            print("\tOR" )
             self.curOff+=1
         elif(state == 0x16):
-            print("NotZero" )
+            print("\tNotZero" )
             self.curOff+=1
         elif(state == 0x17):
-            print("LeftShift" )
+            print("\tLeftShift" )
             self.curOff+=1
         elif(state == 0x18):
-            print("RightShift" )
+            print("\tRightShift" )
             self.curOff+=1
         elif(state == 3 or state == 4 or state == 0x2a):
             arg1 = b16(f)
-            print("JMP: %04i" %(arg1))
+            print("\tJMP: Addr_%04i" %(arg1))
+            self.jumpPoint.append(arg1)
             self.curOff+=3
         elif(state == 0x25):
             indexFunc = u8(f)
@@ -106,19 +110,21 @@ class StateMech(object):
         elif(state == 0x28):
             arg1 = b16(f)
             
-            print("if(Val%02i):goto %04i" %(self.curVar-1,arg1))
+            print("\tif(Val%02i):goto Addr_%04i" %(self.curVar-1,arg1))
             self.curVar-=1
+            self.jumpPoint.append(arg1)
             self.curOff+=3
         elif(state == 0xB or state == 9):
             arg1 = b16(f)
             self.resultBuffer.append(arg1)
-            #print("Store: %s" %(hex(arg1)))
+            #print("\tStore: %s" %(hex(arg1)))
             self.curOff+=3
         elif(state == 1):
             arg1 = b16(f)
-            print("Intro:%s : %s" %(hex(state),arg1))
+            print("\tIntro:%s : %s" %(hex(state),arg1))
             self.curOff+=3
         return 1
 test = StateMech()
+print("Entry:")
 while(test.readState(fIN)):
     pass
