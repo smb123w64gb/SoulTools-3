@@ -1,5 +1,7 @@
 import sys
 import struct
+import tristrip_rust
+#https://github.com/Al-Hydra/Blender-XFBIN-Importer/tree/main/blender/utils/tristrip/tristrip_rust
 
 def VertPS2(val):
     return struct.pack("<fffI", val[0],val[1],val[2],val[3])
@@ -46,42 +48,52 @@ class Model(object):
     def readPoly(self,v):
         self.poly.append([int(v[1]),int(v[2]),int(v[3])])
     def toBlob(self):
+        
+        stripped = tristrip_rust.stripify(self.poly,False)
+        print(stripped)
+        trilen = 0
+        for x in stripped:
+            trilen += len(x)
         out = bytearray()
         out.extend(preabmle) #Comonly found for static mesh
-        out.extend(w8(len(self.poly)*3))
+        out.extend(w8(trilen))
         out.append(0x80)
         out.extend(w16(0))
         out.extend(finalpreamble)
 
         out.append(0x3) #PosData
         out.append(0x80)
-        out.extend(w8(len(self.poly)*3))
+        out.extend(w8(trilen))
         out.append(0x6C)#UnpackMode?
-        for x in self.poly:
-            for y in x:
-                out.extend(VertPS2([self.verts[y][0],self.verts[y][1],self.verts[y][2],36848]))
+        for x in stripped:
+            stripEnd = len(x)-1
+            for idy,y in enumerate(x):
+                if(idy>1):
+                    out.extend(VertPS2([self.verts[y][0],self.verts[y][1],self.verts[y][2],4080]))
+                else:
+                    out.extend(VertPS2([self.verts[y][0],self.verts[y][1],self.verts[y][2],36848]))
 
         out.append(4) #Normal
         out.append(0x80)
-        out.extend(w8(len(self.poly)*3))
+        out.extend(w8(trilen))
         out.append(0x68) #UnpackMode?
-        for x in self.poly:
+        for x in stripped:
             for y in x:
                 out.extend(NormPS2([self.norms[y][0],self.norms[y][1],self.norms[y][2]]))
         
         out.append(2) #Color
         out.append(0x80)
-        out.extend(w8(len(self.poly)*3))
+        out.extend(w8(trilen))
         out.append(0x60)
-        for x in self.poly:
+        for x in stripped:
             for y in x:
                 out.extend(w32(0x43000000)) #Bruh idk how this color thing works yet
 
         out.append(1) #UV
         out.append(0x80)
-        out.extend(w8(len(self.poly)*3))
+        out.extend(w8(trilen))
         out.append(0x64)
-        for x in self.poly:
+        for x in stripped:
             for y in x:
                 out.extend(UVPS2([self.texcr[y][0],self.texcr[y][1]]))
         return out
