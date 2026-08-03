@@ -9,4 +9,3 @@ moveset.read(inread)
 
 for x in moveset.Normal:
     print(x)
-    #print(x.cmd_data)

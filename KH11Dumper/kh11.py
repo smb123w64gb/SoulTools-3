@@ -8,9 +8,8 @@ def readcmd(f:FRead):
         values.append(state)
         state = state & 0x7f
         match state:
-            case 1 | 3 | 4 | 9 | 0xa | 0x25 | 0x28 | 0x2a:
-                values.append(f.u8())
-                values.append(f.u8())
+            case 1 | 3 | 4 | 9 | 0xB | 0x25 | 0x28 | 0x2a:
+                values.append(f.b16())
             case 2 | 6:
                     return values
             case _:
