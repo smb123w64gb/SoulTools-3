@@ -6,6 +6,3 @@ infile = open(sys.argv[1],'rb')
 inread = FRead(infile)
 moveset = KH11()
 moveset.read(inread)
-
-for x in moveset.Normal:
-    print(x)
