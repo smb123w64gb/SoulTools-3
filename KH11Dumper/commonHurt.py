@@ -31,24 +31,37 @@ actions.read(fileRead)
 topMax = 0
 topMin = 0xFFFF
 totals = {}
+
+'''
+  actionIndex = (uint)*(ushort *)((int)&common_motion->Normal_index + (((int)hurtType & 0xf000U) >> 10)) + ((int)hurtType & 0x7ffU);
+  Gist
+  Upper indexes into the index to index into
+  Then 
+'''
+lowerz = {}
 for x in actions.entrys:
     for iny,y in enumerate(x.entrys):
         strNgy = ''+str("%03i"%iny)
         for z in y:
             lower = (0x7FF&z)
-            upper = z>>11
+            upper = ((z&0xF000)>>10)
+            if upper not in lowerz:lowerz[upper] = 0
             if upper not in totals:totals[upper] = {}
             if lower not in totals[upper]:totals[upper][lower] = 0
             totals[upper][lower] += 1
-            '''print(upper)
+            #print(lower)
             if(topMax<(0x7FF&z)):#11 bit huh
                 topMax = (0x7FF&z)
             if(topMin>(0x7FF&z)):
                 topMin = (0x7FF&z)
-            strNgy += '\t' + hex(z)
+            strNgy += '\t' +hex(((z&0xF000)>>10)) +"  "+ hex(0x7FF&z)
         print(strNgy)
+    print()
 
 print(topMax)
-print(topMin)'''
+print(topMin)
+
 for x,y in totals.items():
+    print(y.items())
     print(str(x)+'\t'+str(len(y)))
+    
