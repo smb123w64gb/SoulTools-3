@@ -20,48 +20,43 @@ struct KHeader{
     u16 neutralCount;
 };
 u32 attack_count = 0;
-struct smallbit{
-u32 unk0;
-u32 unk1;
-u32 unk2;
-u32 unk3;
-};
-struct largebit{
-smallbit unkpack[5];
-u32 tail0;
-u32 tail1;
-};
+u32 grab_count = 0;
+
 struct moves{
-s16 motionIdx;
-u16 unkMotion;
-u32 unk0;
-float motion_multiplier;
-float speed_multiplier;
-u32 unk1;
-
-u32 unk2;
-u32 unk3;
-float unk4;
-
-u32 unk5;
-u32 unk6;
-u32 unk7;
-u32 unk8;
-
-float unknown_multiplier;
-s16 frameCount;
-u16 frameCountUnk;
-u32 cancel_address;
-u8 test @ cancel_address;
-s32 attack_index;
-if(attack_index>0){
-attack_count = attack_count + 1;
-}
+    s16 motionIdx;
+    u16 unkMotion;
+    u32 unk0;
+    float motion_multiplier;
+    float speed_multiplier;
+    u32 unk1;
+    
+    u32 unk2;
+    u32 unk3;
+    float unk4;
+    
+    u32 unk5;
+    u32 unk6;
+    u32 unk7;
+    u32 unk8;
+    
+    float unknown_multiplier;
+    s16 frameCount;
+    u16 frameCountUnk;
+    u32 cancel_address;
+    u8 test @ cancel_address;
+    u32 attack_index;
+    if(attack_index<0xFFFFFFFF){
+        if(attack_index&0x1000){
+            grab_count = grab_count + 1;
+        }else{
+            attack_count = attack_count + 1;
+        }
+    }
 };
 struct vec3short{
-s16 x;
-s16 y;
-s16 z;
+    s16 x;
+    s16 y;
+    s16 z;
 };
 struct attacks {
     u32 hitbox;
@@ -96,9 +91,10 @@ struct attacks {
     u32 unk6;
 };
 struct KHFile{
-KHeader hdr;
-moves chunks[hdr.numEntries];
-attacks aChunk[attack_count];
+    KHeader hdr;
+    moves chunks[hdr.numEntries];
+    attacks aChunk[attack_count];
+    u16 grabs[grab_count];
 
 };
 

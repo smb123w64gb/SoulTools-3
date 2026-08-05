@@ -10,7 +10,7 @@ def readcmd(f:FRead):
         state = state & 0x7f
         match state:
             case 1 | 3 | 4 | 9 | 0xB | 0x25 | 0x28 | 0x2a:
-                values.append(f.b16())
+                values.append(f.u8(),f.u8())
             case 2 | 6:
                 return values
             case _:
@@ -26,14 +26,14 @@ class KH11(object):
     def __init__(self):
         self.header = self.Header()
 
-        self.Normal = []
-        self.Movement = []
-        self.Hurt = []
-        self.Subroutine = []
+        self.Normal:set[KH11.ActionInfo] = []
+        self.Movement:set[KH11.ActionInfo] = []
+        self.Hurt:set[KH11.ActionInfo] = []
+        self.Subroutine:set[KH11.ActionInfo] = []
 
-        self.HurtBoxes = []
+        self.HurtBoxes:set[KH11.AttackInfo] = []
 
-        self.GrabDmgs = []
+        self.GrabDmgs:set[int] = []#Its shorts but still
     def read(self,f:FRead):
         self.header.read(f)
         remainder = self.header.numEntries
@@ -98,10 +98,27 @@ class KH11(object):
         self.header.throw_info = throwoff
 
         self.header.moveGrpCount1 = len(self.Normal)
-        
+        self.header.moveGrpIdx1 = 0
+        curIndex = len(self.Normal)
+
+        self.header.moveGrpCount2 = len(self.Movement)
+        self.header.moveGrpIdx2 = curIndex
+        curIndex += len(self.Movement)
+
+        self.header.hurtCount = len(self.Hurt)
+        self.header.hurtIdx = curIndex
+        curIndex += len(self.Hurt)
+
+        self.header.neutralCount = len(self.Subroutine)
+        self.header.neutralIdx = curIndex
 
         self.header.write(f)
-
+        for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
+            for y in x:
+                y.cmd_address = scriptcur
+                scriptcur += len(y.cmd_data)
+        
+        
         
     class Header(object):
         def __init__(self):
@@ -194,7 +211,7 @@ class KH11(object):
             self.frameCountUnk = 0
             self.cmd_address = 0
             self.attack_index = -1
-            self.cmd_data = []
+            self.cmd_data = bytearray()
         def read(self,f:FRead):
             self.motionIdx = f.s16()
             self.unkMotion = f.u16()
