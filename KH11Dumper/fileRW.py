@@ -14,6 +14,8 @@ class FRead(object): #Generic file reader
         return struct.unpack(self.endian+'I', self.file.read(4))[0]
     def u16(self):
         return struct.unpack(self.endian+'H', self.file.read(2))[0]
+    def b16(self):#Sometimes i dont want to endian swap
+            return struct.unpack('>H', self.file.read(2))[0]
     def u8(self):
         return struct.unpack(self.endian+'B', self.file.read(1))[0]
     def u8_4(self):

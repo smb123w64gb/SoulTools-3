@@ -113,50 +113,10 @@ class MemBuff(object):
         offset += 4
         self.space_left = libipc.pine_read(pinIN, offset, c_char(2), False)
         offset += 4
-#Euro SC3 2.0
-#base_offset = 0x4F3898
 
-#Arcade
-#base_offset = 0x41AD98 
 
-#Korean
-#base_offset = 0x4F3C58
 
-#JP 1.1
-#base_offset = 0x4F3608
+animoff = 0x001B2C54
+opcode = 0x3C063000
 
-#US
-base_offset = 0x4EE098
-arrayOfBuff = []
-for x in range(20):#20 console 25 arcade
-    test = MemBuff(base_offset)
-    arrayOfBuff.append(test)
-    base_offset += 0x38
-while(1):
-    total = 0.0
-    os.system('cls')
-    for test in arrayOfBuff:
-        test.read(ipc)
-        print(test.__str__(True))
-        total += bytes_to_mib(test.space_used)
-    print("Total Used space %02.02f Mib" % total)
-    time.sleep(5)
-
-#NTSC SC2
-'''
-base_offset = 0x3F55B0
-arrayOfBuff = []
-for x in range(18):
-    test = MemBuff(base_offset)
-    arrayOfBuff.append(test)
-    base_offset += 0x38
-while(1):
-    total = 0.0
-    os.system('cls')
-    for test in arrayOfBuff:
-        test.read(ipc)
-        print(test.__str__(True))
-        total += bytes_to_mib(test.space_used)
-    print("Total Used space %02.02f Mib" % total)
-    time.sleep(1)
-'''
+libipc.pine_write(ipc,animoff,0,c_char(6),False)

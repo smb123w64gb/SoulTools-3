@@ -1,4 +1,5 @@
 from fileRW import *
+from datetime import datetime
 
 def readcmd(f:FRead):
     values = []
@@ -9,8 +10,7 @@ def readcmd(f:FRead):
         state = state & 0x7f
         match state:
             case 1 | 3 | 4 | 9 | 0xB | 0x25 | 0x28 | 0x2a:
-                values.append(f.u8())
-                values.append(f.u8())
+                values.append(f.b16())
             case 2 | 6:
                 return values
             case _:
@@ -25,10 +25,15 @@ def cmdLnFind(action,f:FRead):
 class KH11(object):
     def __init__(self):
         self.header = self.Header()
+
         self.Normal = []
         self.Movement = []
         self.Hurt = []
         self.Subroutine = []
+
+        self.HurtBoxes = []
+
+        self.GrabDmgs = []
     def read(self,f:FRead):
         self.header.read(f)
         remainder = self.header.numEntries
@@ -56,6 +61,48 @@ class KH11(object):
                 act.read(f)
                 self.Subroutine.append(act)
                 remainder-=1
+        hurtCount = 0
+        grabDmgCnt = 0
+        for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
+            for y in x:
+                if(y.attack_index>=0):
+                    
+                    cur = y.attack_index
+                    if(cur & 0x1000):
+                        grabDmgCnt = (cur & 0xFFF)+1
+                    else:
+                        hurtCount = cur+1
+        for x in range(hurtCount):
+            hit = self.AttackInfo()
+            hit.read(f)
+            self.HurtBoxes.append(hit)
+        for x in range(grabDmgCnt):
+            self.GrabDmgs.append(f.u16())
+    def write(self,f:FWrite):
+        #Recalc time :)
+        self.header.day = int(datetime.day)
+        self.header.month = int(datetime.month)
+        self.header.year = int(datetime.year)
+        self.header.sec = int(datetime.second)
+        self.header.min = int(datetime.min)
+        self.header.hour = int(datetime.hour)
+        #ok for real counts
+        entrycount = 0
+        for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
+            entrycount += len(x)
+        attackoff = 0x28+(entrycount * 0x40)
+        throwoff = attackoff + (len(self.HurtBoxes)*0x58)
+        scriptcur = throwoff + (len(self.GrabDmgs)*2)
+
+        self.header.attack_list = attackoff
+        self.header.throw_info = throwoff
+
+        self.header.moveGrpCount1 = len(self.Normal)
+        
+
+        self.header.write(f)
+
+        
     class Header(object):
         def __init__(self):
             self.MAGIC = b'KH11'
@@ -167,7 +214,6 @@ class KH11(object):
             self.frameCountUnk = f.u16()
             self.cmd_address = f.u32()
             self.attack_index = f.s32()
-            print(hex(f.tell()))
             self.cmd_data = cmdLnFind(self,f)
         def __str__(self):
             strOut = ''
