@@ -1,10 +1,14 @@
 import struct
+from functools import singledispatch
+import _io,io
 class FRead(object): #Generic file reader
     def __init__(self,f,big_endian=False):
         self.endian='<'
         if(big_endian):
             self.endian ='>'
         self.file = f
+        if not isinstance(f, io.IOBase):
+            self.file = io.BytesIO(f)
     def swapEndian(self):
         if(self.endian == '>'):
             self.endian = '<'
