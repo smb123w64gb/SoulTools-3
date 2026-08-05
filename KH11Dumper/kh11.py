@@ -1,5 +1,6 @@
 from fileRW import *
 from datetime import datetime
+import json
 
 now = datetime.now()
 
@@ -128,10 +129,7 @@ class KH11(object):
             f.u16(x)
         for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
                     for y in x:
-                        f.write(bytes(y.cmd_data))
-        
-        
-        
+                        f.write(bytes(y.cmd_data))   
     class Header(object):
         def __init__(self):
             self.MAGIC = b'KH11'
@@ -205,11 +203,12 @@ class KH11(object):
             f.u16(self.neutralCount)
     class ActionInfo(object):
         def __init__(self):
-            self.motionIdx = -1
+            self.motionIdx1 = -1
             self.unkMotion = 0
             self.unk0 = 0
             self.motion_multiplier = 100.0
             self.speed_multiplier = 100.0
+            self.motionIdx2 = -1
             self.unk1 = 0
             self.unk2 = 0
             self.unk3 = 0
@@ -225,12 +224,13 @@ class KH11(object):
             self.attack_index = -1
             self.cmd_data = bytearray()
         def read(self,f:FRead):
-            self.motionIdx = f.s16()
+            self.motionIdx1 = f.s16()
             self.unkMotion = f.u16()
             self.unk0 = f.u32()
             self.motion_multiplier = f.f32()
             self.speed_multiplier = f.f32()
-            self.unk1 = f.u32()
+            self.motionIdx2 = f.s16()
+            self.unk1 = f.u16()
             self.unk2 = f.u32()
             self.unk3 = f.u32()
             self.unk4 = f.f32()
@@ -244,22 +244,14 @@ class KH11(object):
             self.cmd_address = f.u32()
             self.attack_index = f.s32()
             self.cmd_data = cmdLnFind(self,f)
-        def __str__(self):
-            strOut = ''
-            if(not 0x1000 & self.attack_index):
-                strOut += 'Hurtbox:' + hex(self.attack_index)
-            elif(self.attack_index > 0):
-                strOut += 'GrabIndex:' + hex(self.attack_index&0xFFF)
-            #strOut += str('Mot0: %04i | Mot1: %04i'%(self.motionIdx,self.unkMotion))
-
-            return strOut
         def write(self,f:FWrite):
-            f.s16(self.motionIdx)
+            f.s16(self.motionIdx1)
             f.u16(self.unkMotion)
             f.u32(self.unk0)
             f.f32(self.motion_multiplier)
             f.f32(self.speed_multiplier)
-            f.u32(self.unk1)
+            f.s16(self.motionIdx2)
+            f.u16(self.unk1)
             f.u32(self.unk2)
             f.u32(self.unk3)
             f.f32(self.unk4)
@@ -272,6 +264,12 @@ class KH11(object):
             f.u16(self.frameCountUnk)
             f.u32(self.cmd_address)
             f.s32(self.attack_index)
+        def to_json(self):
+            data_dict = self.__dict__.copy()
+            
+            data_dict.pop('cmd_address', None)
+            data_dict.pop('cmd_data', None)
+            return json.dumps(data_dict, indent=4)
     class AttackInfo(object):
         def __init__(self):
             self.hitbox = 0
