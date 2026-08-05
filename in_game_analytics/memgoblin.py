@@ -114,7 +114,7 @@ class MemBuff(object):
         self.space_left = libipc.pine_read(pinIN, offset, c_char(2), False)
         offset += 4
 #Euro SC3 2.0
-#base_offset = 0x4F3898
+base_offset = 0x4F3898
 
 #Arcade
 #base_offset = 0x41AD98 
@@ -126,7 +126,8 @@ class MemBuff(object):
 #base_offset = 0x4F3608
 
 #US
-base_offset = 0x4EE098
+#base_offset = 0x4EE098
+
 arrayOfBuff = []
 for x in range(20):#20 console 25 arcade
     test = MemBuff(base_offset)

@@ -1,6 +1,8 @@
 from fileRW import *
 from datetime import datetime
 
+now = datetime.now()
+
 def readcmd(f:FRead):
     values = []
     while(1):
@@ -9,10 +11,12 @@ def readcmd(f:FRead):
         values.append(state)
         state = state & 0x7f
         match state:
-            case 1 | 3 | 4 | 9 | 0xB | 0x25 | 0x28 | 0x2a:
-                values.append(f.u8(),f.u8())
+            case 1 | 3 | 4 | 9 | 0xA | 0xB | 0x12 | 0x13 | 0x19 | 0x1A |0x1B | 0x1C | 0x1D | 0x1E | 0x25 | 0x28 | 0x29 | 0x2a:
+                values.append(f.u8())
+                values.append(f.u8())
             case 2 | 6:
                 return values
+                break
             case _:
                 pass
 def cmdLnFind(action,f:FRead):
@@ -80,12 +84,12 @@ class KH11(object):
             self.GrabDmgs.append(f.u16())
     def write(self,f:FWrite):
         #Recalc time :)
-        self.header.day = int(datetime.day)
-        self.header.month = int(datetime.month)
-        self.header.year = int(datetime.year)
-        self.header.sec = int(datetime.second)
-        self.header.min = int(datetime.min)
-        self.header.hour = int(datetime.hour)
+        self.header.day = now.day
+        self.header.month = now.month
+        self.header.year = now.year
+        self.header.sec = now.second
+        self.header.min = now.minute
+        self.header.hour = now.hour
         #ok for real counts
         entrycount = 0
         for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
@@ -117,6 +121,14 @@ class KH11(object):
             for y in x:
                 y.cmd_address = scriptcur
                 scriptcur += len(y.cmd_data)
+                y.write(f)
+        for x in self.HurtBoxes:
+            x.write(f)
+        for x in self.GrabDmgs:
+            f.u16(x)
+        for x in [self.Normal,self.Movement,self.Hurt,self.Subroutine]:
+                    for y in x:
+                        f.write(bytes(y.cmd_data))
         
         
         
