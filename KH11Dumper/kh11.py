@@ -268,8 +268,9 @@ class KH11(object):
             data_dict = self.__dict__.copy()
             
             data_dict.pop('cmd_address', None)
-            data_dict.pop('cmd_data', None)
-            return json.dumps(data_dict, indent=4)
+
+            data = data_dict.pop('cmd_data', None)
+            return [json.dumps(data_dict, indent=4),data]
     class AttackInfo(object):
         def __init__(self):
             self.hitbox = 0
